@@ -1,0 +1,35 @@
+@startuml
+
+abstract class ContaBancaria{
+    - String numeroConta
+    # double saldo
+    + depositar (valor: double)
+    + sacar (valor: double)
+    + getSaldo(): double
+}
+
+class ContaCorrente{
+    + double limiteChequeEspecial
+}
+
+class ContaPoupanca{
+    + calcularJuros(): double
+}
+
+interface imprimivel{
+    + imprimir()
+}
+
+class Cliente{
+    - String nome
+    - ContaBancaria contaBancaria
+}
+
+' Relacionamentos
+ContaCorrente --> ContaBancaria
+ContaPoupanca --> ContaBancaria
+ContaCorrente ..> Imprimivel
+ContaPoupanca ..> Imprimivel
+Cliente --> ContaBancaria
+
+@enduml

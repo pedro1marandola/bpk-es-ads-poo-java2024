@@ -1,0 +1,49 @@
+@startuml
+
+class Produto{
+    - String
+    - double preco
+    - int estoque
+}
+
+class CarrinhoDeCompras{
+    - List<Produto> produtos
+    + adicionarProduto(produto: Produto)
+    + removerProduto(produto: Produto)
+    +calcularTotal(): double
+}
+
+class Cliente{
+    - String nome
+    - String email
+    - String endereco
+}
+
+class Pedido{
+    - Cliente cliente
+    - CarrinhoDeCompras carrinho
+    - Pagavel pagamento
+    + confirmarPedido()
+}
+
+interface Pagavel{
+    + processarPagamento(): boolean
+}
+
+interface PagamentoCartao{
+    + processarPagamento(): boolean
+}
+
+interface PagamentoBoleto{
+    + processarPagamento(): boolean
+}
+
+' Relacionamentos
+CarrinhoDeCompras o-- Produto
+Pedido --> Cliente
+Pedido --> CarrinhoDeCompras
+Pedido --> Pagavel
+PagamentoCartao ..|> Pagavel
+PagamentoBoleto ..|> Pagavel
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+
+abstract class ItemBiblioteca{
+    - Titulo
+    - Codigo
+}
+
+class Livro{
+    + String ISBN
+    + String editora
+}
+
+class Revista{
+    + String periodicidade
+}
+
+class DVD{
+    + String autor
+    + int duracao
+}
+
+class Autor{
+    - String nome
+}
+
+class Usuario{
+    - String email
+    - String nome
+}
+
+class Emprestimo{
+    - Usuario usuario
+    - ItemBiblioteca item
+    - Date dataEmprestimo
+    - Date dataDevolucao
+}
+
+interface Reservavel {
+    + reservar(): boolean
+    + cancelarReserva(): boolean
+}
+
+' Relacionamentos
+Livro ..|> ItemBiblioteca
+Revista ..|> ItemBiblioteca
+DVD ..|> ItemBiblioteca
+Autor --* Livro : "escreve"
+Usuario --* Emprestimo
+Emprestimo --> ItemBiblioteca
+Livro ..|> Reservavel
+DVD ..|> Reservavel
+
+@enduml
